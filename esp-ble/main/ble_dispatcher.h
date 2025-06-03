@@ -1,3 +1,12 @@
+/**
+ * @file ble_dispatcher.h
+ * @brief BLE GATT service event dispatcher for ESP BLE applications.
+ *
+ * The dispatcher is the main entry point for GATT events. It provides
+ * registration and unregistration of BLE GATT services, and dispatches
+ * GATT events to all registered services.
+ */
+
 #pragma once
 #include <esp_gatts_api.h>
 
@@ -9,6 +18,23 @@ typedef struct {
     ble_service_event_callback_t on_event;
 } ble_service_registration_t;
 
+/**
+ * @brief Initialize the BLE dispatcher.
+ *
+ * Must be called before registering any services.
+ */
 void ble_dispatcher_init(void);
 
+/**
+ * @brief Register a BLE service to receive GATT events.
+ *
+ * @param service Pointer to the service registration structure.
+ */
 void ble_dispatcher_register_service(ble_service_registration_t *service);
+
+/**
+ * @brief Unregister a BLE service so it no longer receives GATT events.
+ *
+ * @param service Pointer to the service registration structure to remove.
+ */
+void ble_dispatcher_unregister_service(ble_service_registration_t *service);
