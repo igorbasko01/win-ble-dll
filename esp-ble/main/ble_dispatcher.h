@@ -16,6 +16,7 @@ typedef void (*ble_service_event_callback_t)(esp_gatts_cb_event_t event,
 
 typedef struct {
     ble_service_event_callback_t on_event;
+    uint16_t service_uuid;
 } ble_service_registration_t;
 
 /**

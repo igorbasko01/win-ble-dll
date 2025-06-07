@@ -2,6 +2,7 @@
 #include "ble_server.h"
 #include "nvs_utils.h"
 #include "esp_log.h"
+#include "ble_dispatcher.h"
 
 static const char *TAG = "main";
 
@@ -19,4 +20,7 @@ void app_main(void)
 
     ble_server_init();
     ESP_LOGI(TAG, "BLE server initialized.");
+
+    ble_dispatcher_init();
+    ESP_LOGI(TAG, "BLE dispatcher initialized.");
 }

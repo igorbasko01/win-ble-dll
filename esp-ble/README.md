@@ -1,32 +1,13 @@
-# _Sample project_
+# ESP32-BLE
+This project is a sample project for an ESP32 board that enables BLE on the device
+and allows communicating with it.
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+The basic components of the project are:
+1. `ble_server` - responsible for initializing a BLE server and advertising.
+1. `ble_dispatcher` - responsible for listening to GATT events and passing them to relevant BLE service.
+1. `ble_service_*` - can be multiple different BLE services that are responsible for several characteristics. 
+Should handle initializing and updating characteristics.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
-
-
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+## BLE Services
+Basically each service is responsible for some aspect of the device. Each service should register with the
+dispatcher and be ready to handle events. The service should ignore events that are not related to it.
