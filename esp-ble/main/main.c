@@ -21,6 +21,6 @@ void app_main(void)
     ble_server_init();
     ESP_LOGI(TAG, "BLE server initialized.");
 
-    ble_dispatcher_init();
+    ble_dispatcher_t dispatcher = ble_dispatcher_init();
     ESP_LOGI(TAG, "BLE dispatcher initialized.");
 }

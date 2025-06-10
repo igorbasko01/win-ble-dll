@@ -19,12 +19,20 @@ typedef struct {
     uint16_t service_uuid;
 } ble_service_registration_t;
 
+typedef void (*ble_dispatcher_register_service_t)(ble_service_registration_t *service);
+typedef void (*ble_dispatcher_unregister_service_t)(ble_service_registration_t *service);
+
+typedef struct {
+    ble_dispatcher_register_service_t register_service;
+    ble_dispatcher_unregister_service_t unregister_service;
+} ble_dispatcher_t;
+
 /**
  * @brief Initialize the BLE dispatcher.
  *
  * Must be called before registering any services.
  */
-void ble_dispatcher_init(void);
+ble_dispatcher_t ble_dispatcher_init(void);
 
 /**
  * @brief Register a BLE service to receive GATT events.

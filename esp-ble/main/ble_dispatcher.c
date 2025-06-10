@@ -32,7 +32,7 @@ static void ble_dispatcher_gatts_event_handler(esp_gatts_cb_event_t event,
 /**
  * @brief Initializes the BLE dispatcher and registers the GATTS event handler.
  */
-void ble_dispatcher_init(void)
+ble_dispatcher_t ble_dispatcher_init(void)
 {
     memset(registered_services, 0, sizeof(registered_services));
     num_registered_services = 0;
@@ -40,6 +40,11 @@ void ble_dispatcher_init(void)
     if (err != ESP_OK) {
         printf("ble_dispatcher: Failed to register GATTS callback, err=0x%x\n", err);
     }
+    ble_dispatcher_t dispatcher = {
+        .register_service = ble_dispatcher_register_service,
+        .unregister_service = ble_dispatcher_unregister_service
+    };
+    return dispatcher;
 }
 
 /**
